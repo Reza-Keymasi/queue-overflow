@@ -16,7 +16,7 @@ const AuthLayoutComponent = ({ children }: { children: ReactNode }) => {
     >
       <section className="light-border background-light800_dark200 shadow-light100_dark100 min-w-full rounded-[10px] px-4 sm:px-8 py-10 shadow-md sm:min-w-130">
         <div className="flex-between gap-2">
-          <div className="space-y-2.5">
+          <div className="space-y-1.5">
             <h1 className="h2-bold text-dark100_light900">
               Join Queue <span className="text-primary-500">Overflow</span>
             </h1>
