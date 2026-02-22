@@ -1,0 +1,69 @@
+import Image from "next/image";
+import Link from "next/link";
+
+import NavLinks from "./NavLinks";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import ROUTES from "@/constants/routes";
+
+import Hamburger from "../../../public/icons/hamburger.svg";
+import Logo from "../../../public/images/logo.svg";
+
+const MobileNavigation = () => {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Image
+          src={Hamburger}
+          width={36}
+          height={36}
+          className="invert-colors sm:hidden"
+          alt="hamburger-icon"
+        />
+      </SheetTrigger>
+      <SheetContent
+        side="left"
+        className="background-light900_dark200 border-none px-5 py-10"
+      >
+        <SheetTitle className="hidden">Navigation</SheetTitle>
+        <Link href="/" className="flex items-center gap-1">
+          <Image src={Logo} alt="Logo" />
+          <p className="h3-bold font-space-grotesk text-dark-100 dark:text-light-900 hidden xs:block">
+            Queue<span className="text-primary-500">Overflow</span>
+          </p>
+        </Link>
+        <div className="flex flex-col gap-8 justify-between h-[calc(100vh-80px)] no-scrollbar overflow-y-auto">
+          <SheetClose asChild>
+            <section className="flex flex-col h-full gap-6 pt-6">
+              <NavLinks isMobileNav />
+            </section>
+          </SheetClose>
+          <div className="flex flex-col gap-3">
+            <SheetClose asChild>
+              <Link href={ROUTES.SIGN_IN}>
+                <Button className="w-full min-h-10.25 small-medium btn-secondary rounded-lg px-4">
+                  <span className="primary-text-gradient">Log In</span>
+                </Button>
+              </Link>
+            </SheetClose>
+            <SheetClose>
+              <Link href={ROUTES.SIGN_UP}>
+                <Button className="w-full min-h-10.25 small-medium light-border-2 btn-tertiary text-dark400_light900 rounded-lg px-4 shadow-none">
+                  <span className="primary-text-gradient">Sign Up</span>
+                </Button>
+              </Link>
+            </SheetClose>
+          </div>
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
+};
+
+export default MobileNavigation;
