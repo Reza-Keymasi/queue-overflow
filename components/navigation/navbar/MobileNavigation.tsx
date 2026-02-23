@@ -40,7 +40,7 @@ const MobileNavigation = () => {
         </Link>
         <div className="flex flex-col gap-8 justify-between h-[calc(100vh-80px)] no-scrollbar overflow-y-auto">
           <SheetClose asChild>
-            <section className="flex flex-col h-full gap-6 pt-6">
+            <section className="flex flex-col h-full gap-3 pt-6">
               <NavLinks isMobileNav />
             </section>
           </SheetClose>
