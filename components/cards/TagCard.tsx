@@ -7,12 +7,12 @@ import { getDeviconClassName } from "@/lib/utils";
 interface TagCardsProps {
   _id: string;
   name: string;
-  questions: number;
+  questions?: number;
   showCount?: boolean;
   compact?: boolean;
 }
 
-const TagCards = ({
+const TagCard = ({
   _id,
   name,
   questions,
@@ -38,4 +38,4 @@ const TagCards = ({
   );
 };
 
-export default TagCards;
+export default TagCard;

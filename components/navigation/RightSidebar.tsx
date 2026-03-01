@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import ROUTES from "@/constants/routes";
-import TagCards from "../cards/TagCards";
+import TagCard from "../cards/TagCard";
 
 const hotQuestions = [
   { _id: "1", title: "How to create a custom hook in react?" },
@@ -52,7 +52,7 @@ const RightSidebar = () => {
 
         <div className="mt-7 flex flex-col gap-4">
           {popularTags.map(({ _id, name, questions }) => (
-            <TagCards
+            <TagCard
               key={_id}
               _id={_id}
               name={name}

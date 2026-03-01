@@ -1,27 +1,4 @@
-interface Author {
-  _id: string;
-  name: string;
-  createdAt: string;
-}
-
-interface Tag {
-  _id: string;
-  name: string;
-}
-
-interface Questions {
-  _id: string;
-  title: string;
-  description: string;
-  upvotes: number;
-  views: number;
-  answer: number;
-  createdAt: Date;
-  author: Author[];
-  tags: Tag[];
-}
-
-export const questions: Questions[] = [
+export const questions: Question[] = [
   {
     _id: "q1",
     title:
@@ -30,15 +7,15 @@ export const questions: Questions[] = [
       "Explain how controlled and uncontrolled components work in React. When should you use each approach and what are the trade-offs in terms of performance and maintainability?",
     upvotes: 24,
     views: 312,
-    answer: 5,
+    answers: 5,
     createdAt: new Date("2026-02-20T10:15:00Z"),
-    author: [
-      {
-        _id: "a1",
-        name: "Alice Johnson",
-        createdAt: "2026-02-20T10:15:00Z",
-      },
-    ],
+    author: {
+      _id: "a1",
+      name: "Alice Johnson",
+      image:
+        "https://www.vecteezy.com/png/48216761-modern-male-avatar-with-black-hair-and-hoodie-illustration",
+    },
+
     tags: [
       { _id: "t1", name: "react" },
       { _id: "t2", name: "forms" },
@@ -52,15 +29,15 @@ export const questions: Questions[] = [
       "Describe how server-side rendering (SSR) works in Next.js. What are the benefits compared to client-side rendering and when should SSR be used?",
     upvotes: 41,
     views: 540,
-    answer: 8,
+    answers: 8,
     createdAt: new Date("2026-02-18T08:30:00Z"),
-    author: [
-      {
-        _id: "a2",
-        name: "Michael Smith",
-        createdAt: "2026-02-18T08:30:00Z",
-      },
-    ],
+    author: {
+      _id: "a2",
+      name: "Michael Smith",
+      image:
+        "https://www.vecteezy.com/png/48216761-modern-male-avatar-with-black-hair-and-hoodie-illustration",
+    },
+
     tags: [
       { _id: "t4", name: "nextjs" },
       { _id: "t5", name: "ssr" },
@@ -74,15 +51,15 @@ export const questions: Questions[] = [
       "Explain the core problems TanStack Query addresses such as caching, synchronization, background updates, and stale data. Why is it preferred over manual data fetching with useEffect?",
     upvotes: 37,
     views: 489,
-    answer: 6,
+    answers: 6,
     createdAt: new Date("2026-02-15T12:00:00Z"),
-    author: [
-      {
-        _id: "a3",
-        name: "Sophia Lee",
-        createdAt: "2026-02-15T12:00:00Z",
-      },
-    ],
+    author: {
+      _id: "a3",
+      name: "Sophia Lee",
+      image:
+        "https://www.vecteezy.com/png/48216761-modern-male-avatar-with-black-hair-and-hoodie-illustration",
+    },
+
     tags: [
       { _id: "t7", name: "tanstack-query" },
       { _id: "t8", name: "data-fetching" },
@@ -96,15 +73,15 @@ export const questions: Questions[] = [
       "Compare useState and useReducer hooks. In what scenarios is useReducer more suitable, especially in complex state management cases?",
     upvotes: 29,
     views: 368,
-    answer: 4,
+    answers: 4,
     createdAt: new Date("2026-02-14T09:45:00Z"),
-    author: [
-      {
-        _id: "a4",
-        name: "Daniel Martinez",
-        createdAt: "2026-02-14T09:45:00Z",
-      },
-    ],
+    author: {
+      _id: "a4",
+      name: "Daniel Martinez",
+      image:
+        "https://www.vecteezy.com/png/48216761-modern-male-avatar-with-black-hair-and-hoodie-illustration",
+    },
+
     tags: [
       { _id: "t10", name: "react-hooks" },
       { _id: "t11", name: "state-management" },
@@ -117,15 +94,15 @@ export const questions: Questions[] = [
       "Explain how Next.js generates static pages at build time. What are getStaticProps and getStaticPaths and how do they help in dynamic routes?",
     upvotes: 33,
     views: 410,
-    answer: 7,
+    answers: 7,
     createdAt: new Date("2026-02-10T11:20:00Z"),
-    author: [
-      {
-        _id: "a5",
-        name: "Emily Davis",
-        createdAt: "2026-02-10T11:20:00Z",
-      },
-    ],
+    author: {
+      _id: "a5",
+      name: "Emily Davis",
+      image:
+        "https://www.vecteezy.com/png/48216761-modern-male-avatar-with-black-hair-and-hoodie-illustration",
+    },
+
     tags: [
       { _id: "t12", name: "nextjs" },
       { _id: "t13", name: "ssg" },
@@ -139,15 +116,15 @@ export const questions: Questions[] = [
       "Describe how Zustand works compared to Redux. What are its advantages in terms of boilerplate, performance, and developer experience?",
     upvotes: 22,
     views: 295,
-    answer: 3,
+    answers: 3,
     createdAt: new Date("2026-02-08T14:10:00Z"),
-    author: [
-      {
-        _id: "a6",
-        name: "James Wilson",
-        createdAt: "2026-02-08T14:10:00Z",
-      },
-    ],
+    author: {
+      _id: "a6",
+      name: "James Wilson",
+      image:
+        "https://www.vecteezy.com/png/48216761-modern-male-avatar-with-black-hair-and-hoodie-illustration",
+    },
+
     tags: [
       { _id: "t15", name: "zustand" },
       { _id: "t16", name: "state-management" },
@@ -161,15 +138,15 @@ export const questions: Questions[] = [
       "Explain the concept of React Server Components in the Next.js App Router. How do they differ from Client Components and what performance benefits do they provide?",
     upvotes: 45,
     views: 620,
-    answer: 9,
+    answers: 9,
     createdAt: new Date("2026-02-05T16:40:00Z"),
-    author: [
-      {
-        _id: "a7",
-        name: "Olivia Brown",
-        createdAt: "2026-02-05T16:40:00Z",
-      },
-    ],
+    author: {
+      _id: "a7",
+      name: "Olivia Brown",
+      image:
+        "https://www.vecteezy.com/png/48216761-modern-male-avatar-with-black-hair-and-hoodie-illustration",
+    },
+
     tags: [
       { _id: "t18", name: "nextjs-app-router" },
       { _id: "t19", name: "react-server-components" },
@@ -183,15 +160,15 @@ export const questions: Questions[] = [
       "Define hydration in the context of React and Next.js. What causes hydration mismatches and how can developers debug and prevent them?",
     upvotes: 31,
     views: 402,
-    answer: 5,
+    answers: 5,
     createdAt: new Date("2026-02-03T13:25:00Z"),
-    author: [
-      {
-        _id: "a8",
-        name: "William Taylor",
-        createdAt: "2026-02-03T13:25:00Z",
-      },
-    ],
+    author: {
+      _id: "a8",
+      name: "William Taylor",
+      image:
+        "https://www.vecteezy.com/png/48216761-modern-male-avatar-with-black-hair-and-hoodie-illustration",
+    },
+
     tags: [
       { _id: "t21", name: "react" },
       { _id: "t22", name: "hydration" },
@@ -205,15 +182,15 @@ export const questions: Questions[] = [
       "Explain the concept of optimistic updates in TanStack Query. How do you implement them and handle rollback in case of server failure?",
     upvotes: 27,
     views: 350,
-    answer: 4,
+    answers: 4,
     createdAt: new Date("2026-02-01T10:05:00Z"),
-    author: [
-      {
-        _id: "a9",
-        name: "Isabella Anderson",
-        createdAt: "2026-02-01T10:05:00Z",
-      },
-    ],
+    author: {
+      _id: "a9",
+      name: "Isabella Anderson",
+      image:
+        "https://www.vecteezy.com/png/48216761-modern-male-avatar-with-black-hair-and-hoodie-illustration",
+    },
+
     tags: [
       { _id: "t24", name: "tanstack-query" },
       { _id: "t25", name: "optimistic-update" },
@@ -228,15 +205,15 @@ export const questions: Questions[] = [
       "Compare Redux Toolkit with traditional Redux setup. How does Redux Toolkit reduce boilerplate and improve developer productivity?",
     upvotes: 39,
     views: 510,
-    answer: 6,
+    answers: 6,
     createdAt: new Date("2026-01-28T09:00:00Z"),
-    author: [
-      {
-        _id: "a10",
-        name: "Benjamin Harris",
-        createdAt: "2026-01-28T09:00:00Z",
-      },
-    ],
+    author: {
+      _id: "a10",
+      name: "Benjamin Harris",
+      image:
+        "https://www.vecteezy.com/png/48216761-modern-male-avatar-with-black-hair-and-hoodie-illustration",
+    },
+
     tags: [
       { _id: "t27", name: "redux" },
       { _id: "t28", name: "redux-toolkit" },
