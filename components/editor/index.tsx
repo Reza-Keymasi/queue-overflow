@@ -55,7 +55,7 @@ const Editor = ({
       markdown={value}
       onChange={onChangeEditor}
       ref={editorRef}
-      className="w-full background-light800_dark200 light-border-2 markdown-editor dark-editor border"
+      className="w-full grid background-light800_dark200 light-border-2 markdown-editor dark-editor border"
       plugins={[
         headingsPlugin(),
         listsPlugin(),
