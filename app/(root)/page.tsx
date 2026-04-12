@@ -6,12 +6,25 @@ import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
 import { questions } from "@/constants/questions";
 import QuestionCard from "@/components/cards/QuestionCard";
+import handleError from "@/lib/handlers/error";
+import { NotFoundError, ValidationError } from "@/lib/http-errors";
+import dbConnect from "@/lib/mongoose";
+const test = async () => {
+  try {
+    await dbConnect();
+  } catch (error) {
+    return handleError(error);
+  }
+};
 
 interface SearchParams {
   searchParams: Promise<Record<string, string>>;
 }
 
 const Home = async ({ searchParams }: SearchParams) => {
+  const result = await test();
+  console.log(result);
+
   const { query = "", filter = "" } = await searchParams;
 
   const filteredQuestions = questions.filter((question) => {

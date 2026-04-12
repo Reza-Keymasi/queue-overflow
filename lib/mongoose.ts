@@ -1,6 +1,8 @@
 import mongoose, { Mongoose } from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URL as string;
+import logger from "./logger";
+
+const MONGODB_URI = process.env.MONGODB_URI as string;
 
 if (!MONGODB_URI) {
   throw new Error("MONGODB_URI is not defined");
@@ -18,6 +20,7 @@ declare global {
 let cached = global.mongoose;
 
 if (!cached) {
+  logger.info("Using existing mongoose conncetion");
   cached = global.mongoose = { conn: null, promise: null };
 }
 
@@ -32,11 +35,11 @@ const dbConnect = async (): Promise<Mongoose> => {
         dbName: "queue-overflow",
       })
       .then((result) => {
-        console.log("Connected", result);
+        logger.info("Connected to MongoDB");
         return result;
       })
       .catch((error) => {
-        console.error("Error conncetion to MongoDB");
+        logger.error("Error conncetion to MongoDB");
         throw error;
       });
   }
