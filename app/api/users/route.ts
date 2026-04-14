@@ -12,7 +12,6 @@ export async function GET() {
     await dbConnect();
 
     const users = await User.find();
-    console.log(users);
 
     return NextResponse.json({ success: true, data: users }, { status: 200 });
   } catch (error) {
