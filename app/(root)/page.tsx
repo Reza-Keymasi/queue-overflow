@@ -8,6 +8,7 @@ import { questions } from "@/constants/questions";
 import QuestionCard from "@/components/cards/QuestionCard";
 import handleError from "@/lib/handlers/error";
 import dbConnect from "@/lib/mongoose";
+import { api } from "@/lib/api";
 
 interface SearchParams {
   searchParams: Promise<Record<string, string>>;
@@ -15,14 +16,14 @@ interface SearchParams {
 
 const test = async () => {
   try {
-    await dbConnect();
+    return await api.users.getAll();
   } catch (error) {
     return handleError(error);
   }
 };
 
 const Home = async ({ searchParams }: SearchParams) => {
-  await test();
+  const users = await test();
 
   const { query = "", filter = "" } = await searchParams;
 

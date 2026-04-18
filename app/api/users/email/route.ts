@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import dbConnect from "@/lib/mongoose";
 import User from "@/database/user.model";
 import handleError from "@/lib/handlers/error";
 import { NotFoundError, ValidationError } from "@/lib/http-errors";
@@ -10,6 +11,8 @@ export async function POST(request: Request) {
   const { email } = await request.json();
 
   try {
+    await dbConnect();
+
     const validatedData = UserSchema.partial().safeParse({ email });
     if (!validatedData.success)
       throw new ValidationError(validatedData.error.flatten().fieldErrors);
