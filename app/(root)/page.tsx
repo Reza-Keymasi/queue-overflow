@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { auth } from "@/auth";
 
 import LocalSearch from "@/components/search/LocalSearch";
 import HomeFilter from "@/components/filters/HomeFilter";
@@ -7,7 +8,6 @@ import ROUTES from "@/constants/routes";
 import { questions } from "@/constants/questions";
 import QuestionCard from "@/components/cards/QuestionCard";
 import handleError from "@/lib/handlers/error";
-import dbConnect from "@/lib/mongoose";
 import { api } from "@/lib/api";
 
 interface SearchParams {
@@ -23,7 +23,7 @@ const test = async () => {
 };
 
 const Home = async ({ searchParams }: SearchParams) => {
-  const users = await test();
+  const session = await auth();
 
   const { query = "", filter = "" } = await searchParams;
 
