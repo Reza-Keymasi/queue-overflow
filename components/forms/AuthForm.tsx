@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { ZodType } from "zod";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   DefaultValues,
   FieldValues,
   Path,
+  Resolver,
   SubmitHandler,
   useForm,
 } from "react-hook-form";
@@ -22,32 +23,57 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import ROUTES from "@/constants/routes";
+import { ActionResponse } from "@/types/global";
+import { toast } from "sonner";
+import { SignInFormSchema, SignUpFormSchema } from "@/lib/validations";
 
 interface AuthFormProps<T extends FieldValues> {
-  schema: ZodType<T, any, any>;
   defaultValues: T;
   formType: "SIGN_IN" | "SIGN_UP";
-  onSubmit: (data: T) => Promise<{ success: boolean }>;
+  onSubmit: (data: T) => Promise<ActionResponse>;
 }
 
 const AuthForm = <T extends FieldValues>({
-  schema,
   defaultValues,
   formType,
   onSubmit,
 }: AuthFormProps<T>) => {
+  const router = useRouter();
+
+  const schema = formType === "SIGN_UP" ? SignUpFormSchema : SignInFormSchema;
+
   const form = useForm<T>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schema) as unknown as Resolver<T>,
     defaultValues: defaultValues as DefaultValues<T>,
   });
 
-  const handleSubmit: SubmitHandler<T> = async () => {};
+  const handleSubmit: SubmitHandler<T> = async (data) => {
+    const result = (await onSubmit(data)) as ActionResponse;
+
+    if (result?.success) {
+      toast.success("Success", {
+        description:
+          formType === "SIGN_UP"
+            ? "Signed up successfully"
+            : "Signed in successfully",
+      });
+
+      router.push(ROUTES.HOME);
+    } else {
+      toast.error(`Error ${result?.status}`, {
+        description: result?.error?.message,
+      });
+    }
+  };
 
   const btnText = formType === "SIGN_IN" ? " Sign In" : "Sign Up";
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="mt-10 space-y-6">
+      <form
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className="mt-10 space-y-6"
+      >
         {Object.keys(defaultValues).map((field) => (
           <FormField
             key={field}
