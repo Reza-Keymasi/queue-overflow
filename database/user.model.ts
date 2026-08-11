@@ -1,16 +1,17 @@
-import { model, models, Schema } from "mongoose";
+import { Document, model, models, Schema } from "mongoose";
 
 export interface IUser {
   name: string;
   username: string;
   email: string;
   bio?: string;
-  image: string;
+  image?: string;
   location?: string;
   portfolio?: string;
   reputation?: string;
 }
 
+export interface IUserDoc extends IUser, Document {}
 const UserSchema = new Schema(
   {
     name: {
@@ -27,7 +28,7 @@ const UserSchema = new Schema(
       unique: true,
     },
     bio: { type: String },
-    image: { type: String, required: true },
+    image: { type: String },
     location: { type: String },
     portfolio: { type: String },
     reputation: { type: Number, default: 0 },
