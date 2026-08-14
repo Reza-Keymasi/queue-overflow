@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { auth } from "@/auth";
 
 import LocalSearch from "@/components/search/LocalSearch";
 import HomeFilter from "@/components/filters/HomeFilter";
@@ -23,8 +22,6 @@ const test = async () => {
 };
 
 const Home = async ({ searchParams }: SearchParams) => {
-  const session = await auth();
-
   const { query = "", filter = "" } = await searchParams;
 
   const filteredQuestions = questions.filter((question) => {
