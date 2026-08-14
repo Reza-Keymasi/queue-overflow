@@ -5,7 +5,6 @@ import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
 import { api } from "./lib/api";
-import { ActionResponse } from "./types/global";
 import type { IAccountDoc } from "./database/account.model";
 import { SignInFormSchema } from "./lib/validations";
 import { IUserDoc } from "./database/user.model";

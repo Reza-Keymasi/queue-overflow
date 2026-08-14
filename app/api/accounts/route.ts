@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongoose";
 import Account from "@/database/account.model";
 import handleError from "@/lib/handlers/error";
-import { APIErrorResponse } from "@/types/global";
 import { AccountSchema } from "@/lib/validations";
 import { ForbiddenError } from "@/lib/http-errors";
 

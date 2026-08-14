@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 
 import dbConnect from "@/lib/mongoose";
 import handleError from "@/lib/handlers/error";
-import { APIErrorResponse } from "@/types/global";
 import { SignInWithOAuthSchema } from "@/lib/validations";
 import { ValidationError } from "@/lib/http-errors";
 import User from "@/database/user.model";

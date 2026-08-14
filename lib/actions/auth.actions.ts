@@ -4,7 +4,6 @@
 import bcrypt from "bcryptjs";
 
 import action from "../handlers/action";
-import { ActionResponse, ErrorResponse } from "@/types/global";
 import { SignInFormSchema, SignUpFormSchema } from "../validations";
 import handleError from "../handlers/error";
 import User from "@/database/user.model";
