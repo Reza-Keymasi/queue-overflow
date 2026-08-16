@@ -16,7 +16,7 @@ declare global {
   interface Question {
     _id: string;
     title: string;
-    description: string;
+    content: string;
     upvotes: number;
     views: number;
     answers: number;

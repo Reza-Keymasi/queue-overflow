@@ -20,7 +20,7 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import TagCard from "../cards/TagCard";
-import { createQuestion } from "@/lib/actions/question.actions";
+import { createQuestion, editQuestion } from "@/lib/actions/question.actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Circle } from "lucide-react";
@@ -29,7 +29,12 @@ const Editor = dynamic(() => import("@/components/editor"), {
   ssr: false,
 });
 
-const QuestionForm = () => {
+interface QuestionFormProps {
+  question?: Question;
+  isEdit?: boolean;
+}
+
+const QuestionForm = ({ question, isEdit = false }: QuestionFormProps) => {
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
@@ -37,9 +42,9 @@ const QuestionForm = () => {
   const form = useForm<z.infer<typeof AskQuestionSchema>>({
     resolver: zodResolver(AskQuestionSchema),
     defaultValues: {
-      title: "",
-      content: "",
-      tags: [],
+      title: question?.title || "",
+      content: question?.content || "",
+      tags: question?.tags.map((tag) => tag.name) || [],
     },
   });
 
@@ -87,6 +92,27 @@ const QuestionForm = () => {
     data: z.infer<typeof AskQuestionSchema>
   ) => {
     startTransition(async () => {
+      if (isEdit && question) {
+        const result = await editQuestion({
+          ...data,
+          questionId: question?._id,
+        });
+
+        if (result.success) {
+          toast.success("Success", {
+            description: "Question updated successfully",
+          });
+
+          if (result.data) router.push(`/questions/${result.data._id}`);
+        } else {
+          toast.error(`Error ${result.status}`, {
+            description: result.error?.message || "Something went wrong",
+          });
+        }
+
+        return;
+      }
+
       const result = await createQuestion(data);
 
       if (result.success) {
@@ -210,7 +236,7 @@ const QuestionForm = () => {
                 <span>Submitting</span>
               </>
             ) : (
-              "Ask A Question"
+              <>{isEdit ? "Edit" : "Ask A Question"}</>
             )}
           </Button>
         </div>
