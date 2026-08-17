@@ -4,10 +4,11 @@ import LocalSearch from "@/components/search/LocalSearch";
 import HomeFilter from "@/components/filters/HomeFilter";
 import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
-import { questions } from "@/constants/questions";
 import QuestionCard from "@/components/cards/QuestionCard";
 import handleError from "@/lib/handlers/error";
 import { api } from "@/lib/api";
+import { getQuestions } from "@/lib/actions/question.actions";
+import { questions } from "@/constants/questions";
 
 interface SearchParams {
   searchParams: Promise<Record<string, string>>;
@@ -22,20 +23,30 @@ const test = async () => {
 };
 
 const Home = async ({ searchParams }: SearchParams) => {
-  const { query = "", filter = "" } = await searchParams;
+  const { page, pageSize, query, filter } = await searchParams;
 
-  const filteredQuestions = questions.filter((question) => {
-    const matchedQuery = question.title
-      .toLowerCase()
-      .includes(query?.toLowerCase());
-    const matchedFilter = filter
-      ? question.tags.some(
-          (tag) => tag.name.toLowerCase() === filter.toLowerCase()
-        )
-      : true;
-
-    return matchedQuery && matchedFilter;
+  const { success, data, error } = await getQuestions({
+    page: Number(page) || 1,
+    pageSize: Number(pageSize) || 10,
+    query: query || "",
+    filter: filter || "",
   });
+
+  const { questions } = data || {};
+
+  // const filteredQuestions = questions.filter((question) => {
+  //   const matchedQuery = question.title
+  //     .toLowerCase()
+  //     .includes(query?.toLowerCase());
+  //   const matchedFilter = filter
+  //     ? question.tags.some(
+  //         (tag) => tag.name.toLowerCase() === filter.toLowerCase()
+  //       )
+  //     : true;
+
+  //   return matchedQuery && matchedFilter;
+  // });
+
   return (
     <>
       <section className="w-full flex flex-col-reverse sm:flex-row justify-between gap-4 sm:items-center">
@@ -57,11 +68,25 @@ const Home = async ({ searchParams }: SearchParams) => {
         />
       </section>
       <HomeFilter />
-      <div className="w-full flex flex-col gap-6 mt-10">
-        {filteredQuestions.map((question) => (
-          <QuestionCard key={question._id} question={question} />
-        ))}
-      </div>
+      {success ? (
+        <div className="w-full flex flex-col gap-6 mt-10">
+          {questions && questions.length > 0 ? (
+            questions.map((question) => (
+              <QuestionCard key={question._id} question={question} />
+            ))
+          ) : (
+            <div className="mt-10 flex items-center justify-center w-full">
+              <p className="text-dark400_light700">No questions found</p>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="mt-10 flex items-center justify-center w-full">
+          <p className="text-dark400_light700">
+            {error?.message || "Failed to fetch"}
+          </p>
+        </div>
+      )}
     </>
   );
 };
