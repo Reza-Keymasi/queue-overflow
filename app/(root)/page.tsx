@@ -9,6 +9,8 @@ import handleError from "@/lib/handlers/error";
 import { api } from "@/lib/api";
 import { getQuestions } from "@/lib/actions/question.actions";
 import { questions } from "@/constants/questions";
+import DataRenderer from "@/components/DataRenderer";
+import { EMPTY_QUESTION } from "@/constants/states";
 
 interface SearchParams {
   searchParams: Promise<Record<string, string>>;
@@ -68,25 +70,19 @@ const Home = async ({ searchParams }: SearchParams) => {
         />
       </section>
       <HomeFilter />
-      {success ? (
-        <div className="w-full flex flex-col gap-6 mt-10">
-          {questions && questions.length > 0 ? (
-            questions.map((question) => (
+      <DataRenderer
+        success={success}
+        data={questions}
+        error={error}
+        empty={EMPTY_QUESTION}
+        render={(questions) => (
+          <div className="mt-10 w-full flex flex-col gap-6">
+            {questions.map((question) => (
               <QuestionCard key={question._id} question={question} />
-            ))
-          ) : (
-            <div className="mt-10 flex items-center justify-center w-full">
-              <p className="text-dark400_light700">No questions found</p>
-            </div>
-          )}
-        </div>
-      ) : (
-        <div className="mt-10 flex items-center justify-center w-full">
-          <p className="text-dark400_light700">
-            {error?.message || "Failed to fetch"}
-          </p>
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      />
     </>
   );
 };
