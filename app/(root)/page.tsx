@@ -66,6 +66,7 @@ const Home = async ({ searchParams }: SearchParams) => {
           route="/"
           imgSrc="/icons/search.svg"
           placeholder="Search questions..."
+          iconPosition="left"
           className="flex-1"
         />
       </section>
