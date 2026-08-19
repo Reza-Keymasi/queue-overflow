@@ -53,6 +53,88 @@ export const techMap: Record<string, string> = {
   aws: "devicon-amazonwebservices-original",
   "amazon web services": "devicon-amazonwebservices-original",
 
-  tailwind: "devicon-tailwindcss-original",
-  tailwindcss: "devicon-tailwindcss-original",
+  firebase: "devicon-firebase-plain",
+
+  graphql: "devicon-graphql-plain",
+
+  vue: "devicon-vuejs-plain",
+  vuejs: "devicon-vuejs-plain",
+
+  tailwind: "devicon-tailwindcss-plain",
+  tailwindcss: "devicon-tailwindcss-plain",
+
+  angular: "devicon-angularjs-plain",
+
+  jquery: "devicon-jquery-plain",
+
+  sass: "devicon-sass-plain",
+
+  laravel: "devicon-laravel-plain",
+
+  rails: "devicon-rails-plain",
+  ruby: "devicon-rails-plain",
+
+  redis: "devicon-redis-plain",
+
+  linux: "devicon-linux-plain",
+
+  jenkins: "devicon-jenkins-plain",
+
+  kubernetes: "devicon-kubernetes-plain",
+
+  azure: "devicon-azure-plain",
+  "azure devops": "devicon-azure-plain",
+
+  gcp: "devicon-googlecloud-plain",
+  "google cloud": "devicon-googlecloud-plain",
+
+  bitbucket: "devicon-bitbucket-plain",
+
+  nginx: "devicon-nginx-plain",
+
+  blender: "devicon-blender-plain",
+
+  unity: "devicon-unity-original",
+
+  unreal: "devicon-unrealengine-original",
+
+  swift: "devicon-swift-plain",
+
+  kotlin: "devicon-kotlin-plain",
+
+  go: "devicon-go-plain",
+
+  rust: "devicon-rust-plain",
+
+  dart: "devicon-dart-plain",
+
+  flask: "devicon-flask-original",
+
+  django: "devicon-django-plain",
+
+  bootstrap: "devicon-bootstrap-plain",
+
+  materialui: "devicon-materialui-plain",
+  "material ui": "devicon-materialui-plain",
+
+  photoshop: "devicon-photoshop-plain",
+  illustrator: "devicon-illustrator-plain",
+  xd: "devicon-xd-plain",
+  premiere: "devicon-premiere-plain",
+
+  figma: "devicon-figma-plain",
+
+  inkscape: "devicon-inkscape-plain",
+
+  trello: "devicon-trello-plain",
+
+  jira: "devicon-jira-plain",
+
+  heroku: "devicon-heroku-plain",
+
+  elasticsearch: "devicon-elasticsearch-plain",
+
+  redux: "devicon-redux-original",
+
+  threejs: "devicon-threejs-original",
 };
