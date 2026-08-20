@@ -9,7 +9,8 @@ interface MetricProps {
   title: string;
   value: string | number;
   href?: string;
-  textClassName: string;
+  textStyles: string;
+  titleStyles?: string;
   imgClassName?: string;
   isAuthor?: boolean;
 }
@@ -20,7 +21,8 @@ const Metric = ({
   title,
   value,
   href,
-  textClassName,
+  textStyles,
+  titleStyles = "",
   imgClassName,
   isAuthor,
 }: MetricProps) => {
@@ -34,16 +36,20 @@ const Metric = ({
         className={cn("rounded-full object-contain", imgClassName)}
       />
 
-      <p className={cn("flex items-center gap-1", textClassName)}>
+      <p className={cn("flex items-center gap-1", textStyles)}>
         {value}
-        <span
-          className={cn(
-            "small-regular line-clamp-1",
-            isAuthor ? "max-sm:hidden" : ""
-          )}
-        >
-          {title}
-        </span>
+
+        {title ? (
+          <span
+            className={cn(
+              "small-regular line-clamp-1",
+
+              isAuthor ? "max-sm:hidden" : ""
+            )}
+          >
+            {title}
+          </span>
+        ) : null}
       </p>
     </>
   );
