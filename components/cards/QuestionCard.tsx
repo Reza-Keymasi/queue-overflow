@@ -40,7 +40,7 @@ const QuestionCard = ({
           value={author.name}
           alt={author.name}
           href={ROUTES.PROFILE(author._id)}
-          textClassName="body-medium text-dark400_light700"
+          textStyles="body-medium text-dark400_light700"
           isAuthor
         />
 
@@ -50,21 +50,21 @@ const QuestionCard = ({
             alt="like"
             value={upvotes}
             title=" Votes"
-            textClassName="small-medium text-dark400_light800"
+            textStyles="small-medium text-dark400_light800"
           />
           <Metric
             imgUrl="/icons/message.svg"
             alt="answers"
             value={answers}
             title=" Answers"
-            textClassName="small-medium text-dark400_light800"
+            textStyles="small-medium text-dark400_light800"
           />
           <Metric
             imgUrl="/icons/eye.svg"
             alt="views"
             value={views}
             title=" Views"
-            textClassName="small-medium text-dark400_light800"
+            textStyles="small-medium text-dark400_light800"
           />
         </div>
       </div>
