@@ -1,6 +1,6 @@
 "use server";
 
-// import mongoose from "mongoose";
+import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
 import action from "../handlers/action";
@@ -25,19 +25,19 @@ export async function signUpWithCredentials(
 
   const { name, username, email, password } = validationResult.params!;
 
-  // const session = await mongoose.startSession();
-  // session.startTransaction();
+  const session = await mongoose.startSession();
+  session.startTransaction();
 
   try {
-    const existingUser = await User.findOne({ email });
-    // const existingUser = await User.findOne({ email }).session(session);
+    // const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email }).session(session);
 
     if (existingUser) {
       throw new Error("User already exists");
     }
 
-    const existingUsername = await User.findOne({ username });
-    // const existingUsername = await User.findOne({username}).session(session)
+    // const existingUsername = await User.findOne({ username });
+    const existingUsername = await User.findOne({ username }).session(session);
 
     if (existingUsername) {
       throw new Error("User already exists");
@@ -45,18 +45,12 @@ export async function signUpWithCredentials(
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const [newUser] = await User.create([{ username, name, email }]);
-    // const [newUser] = await User.create([{ username, name, email }],{session});
+    // const [newUser] = await User.create([{ username, name, email }]);
+    const [newUser] = await User.create([{ username, name, email }], {
+      session,
+    });
 
-    // await Account.create({
-    //   userId: newUser._id,
-    //   name,
-    //   provider: "credentials",
-    //   providerAccountId: email,
-    //   password: hashedPassword,
-    // }, {session});
-
-    await Account.create([
+    await Account.create(
       {
         userId: newUser._id,
         name,
@@ -64,19 +58,30 @@ export async function signUpWithCredentials(
         providerAccountId: email,
         password: hashedPassword,
       },
-    ]);
+      { session }
+    );
 
-    // await sessionStorage.commitTransaction()
+    // await Account.create([
+    //   {
+    //     userId: newUser._id,
+    //     name,
+    //     provider: "credentials",
+    //     providerAccountId: email,
+    //     password: hashedPassword,
+    //   },
+    // ]);
+
+    await sessionStorage.commitTransaction();
 
     await signIn("credentials", { email, password, redirect: false });
 
     return { success: true };
   } catch (error) {
-    // await session.abortTransaction();
+    await session.abortTransaction();
 
     return handleError(error) as ErrorResponse;
   } finally {
-    // await session.endSession();
+    await session.endSession();
   }
 }
 
