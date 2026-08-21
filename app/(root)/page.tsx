@@ -8,7 +8,6 @@ import QuestionCard from "@/components/cards/QuestionCard";
 import handleError from "@/lib/handlers/error";
 import { api } from "@/lib/api";
 import { getQuestions } from "@/lib/actions/question.actions";
-import { questions } from "@/constants/questions";
 import DataRenderer from "@/components/DataRenderer";
 import { EMPTY_QUESTION } from "@/constants/states";
 
