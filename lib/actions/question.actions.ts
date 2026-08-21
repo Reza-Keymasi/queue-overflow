@@ -1,6 +1,7 @@
 "use server";
 
 import mongoose, { QueryFilter } from "mongoose";
+import { revalidatePath } from "next/cache";
 
 import action from "../handlers/action";
 import {
