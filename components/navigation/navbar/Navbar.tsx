@@ -22,11 +22,11 @@ const Navbar = async () => {
       <div className="flex-between gap-5">
         <Theme />
 
-        {session?.user && (
+        {session?.user?.id && (
           <UserAvatar
-            id={session?.user?.id}
-            name={session?.user?.name}
-            imageUrl={session?.user?.image}
+            id={session.user.id}
+            name={session.user.name!}
+            imageUrl={session.user?.image}
           />
         )}
 
