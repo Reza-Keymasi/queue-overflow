@@ -18,6 +18,7 @@ declare global {
     title: string;
     content: string;
     upvotes: number;
+    downvotes: number;
     views: number;
     answers: number;
     createdAt: Date;
