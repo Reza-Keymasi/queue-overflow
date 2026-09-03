@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { use, useState } from "react";
+import { use, useOptimistic, useTransition } from "react";
 import { useSession } from "next-auth/react";
 
 import { toggleSaveQuestion } from "@/lib/actions/collection.actions";
@@ -20,43 +20,52 @@ const SaveQuestion = ({
   const userId = session.data?.user?.id;
 
   const { data } = use(hasSavedQuestionPromise);
-  const { saved: hasSaved } = data || {};
+  const { saved: hasSaved = false } = data || {};
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [optimisticSaved, setOptimisticSaved] = useOptimistic(
+    hasSaved,
+    (_, newSaved: boolean) => newSaved
+  );
+
+  const [isSaving, startTransition] = useTransition();
 
   const handleSave = async () => {
-    if (isLoading) return;
+    if (isSaving) return;
 
     if (!userId)
       return toast.error("You need to be logged in to save a question");
 
-    setIsLoading(true);
+    const nextSaved = !optimisticSaved;
 
-    try {
-      const { success, data, error } = await toggleSaveQuestion({ questionId });
+    startTransition(async () => {
+      setOptimisticSaved(nextSaved);
 
-      if (!success) throw new Error(error?.message || "An error occurred");
+      try {
+        const { success, data, error } = await toggleSaveQuestion({
+          questionId,
+        });
 
-      toast.success(
-        `Question ${data?.saved ? "saved" : "unsaved"} successfully`
-      );
-    } catch (error) {
-      toast.error("Error", {
-        description:
-          error instanceof Error ? error.message : "An error occured",
-      });
-    } finally {
-      setIsLoading(false);
-    }
+        if (!success) throw new Error(error?.message || "An error occurred");
+
+        toast.success(
+          `Question ${data?.saved ? "saved" : "unsaved"} successfully`
+        );
+      } catch (error) {
+        toast.error("Error", {
+          description:
+            error instanceof Error ? error.message : "An error occured",
+        });
+      }
+    });
   };
 
   return (
     <Image
-      src={hasSaved ? "/icons/star-filled.svg" : "/icons/star-red.svg"}
+      src={optimisticSaved ? "/icons/star-filled.svg" : "/icons/star-red.svg"}
       width={18}
       height={18}
       alt="save"
-      className={`cursor-pointer ${isLoading && "opacity-50"}`}
+      className={`cursor-pointer ${isSaving && "opacity-50"}`}
       aria-label="Save question"
       onClick={handleSave}
     />
