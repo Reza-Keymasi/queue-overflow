@@ -18,8 +18,9 @@ import { hasVoted } from "@/lib/actions/vote.actions";
 import SaveQuestion from "@/components/questions/SaveQuestion";
 import { hasSavedQuestion } from "@/lib/actions/collection.actions";
 
-const QuestionDetails = async ({ params }: RouteParams) => {
+const QuestionDetails = async ({ params, searchParams }: RouteParams) => {
   const { id } = await params;
+  const { page, pageSize, filter } = await searchParams;
 
   const {
     success,
@@ -37,7 +38,12 @@ const QuestionDetails = async ({ params }: RouteParams) => {
     success: areAnswersLoaded,
     data: answersResult,
     error: answersError,
-  } = await getAnswers({ questionId: id, page: 1, pageSize: 10 });
+  } = await getAnswers({
+    questionId: id,
+    page: Number(page) || 1,
+    pageSize: Number(pageSize) || 10,
+    filter,
+  });
 
   const hasVotedPromise = hasVoted({
     targetId: question._id,
