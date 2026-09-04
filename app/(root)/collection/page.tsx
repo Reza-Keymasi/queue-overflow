@@ -4,6 +4,8 @@ import DataRenderer from "@/components/DataRenderer";
 import { EMPTY_QUESTION } from "@/constants/states";
 import { getSavedQuestions } from "@/lib/actions/collection.actions";
 import ROUTES from "@/constants/routes";
+import CommonFilters from "@/components/filters/CommonFilters";
+import { CollectionFilters } from "@/constants/filters";
 
 interface SearchParams {
   searchParams: Promise<Record<string, string>>;
@@ -31,6 +33,11 @@ const Collections = async ({ searchParams }: SearchParams) => {
           placeholder="Search questions..."
           iconPosition="left"
           className="flex-1"
+        />
+
+        <CommonFilters
+          filters={CollectionFilters}
+          otherClasses="min-h-14 sm:min-w-42.5"
         />
       </section>
 
