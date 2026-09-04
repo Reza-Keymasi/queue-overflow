@@ -10,18 +10,12 @@ import { api } from "@/lib/api";
 import { getQuestions } from "@/lib/actions/question.actions";
 import DataRenderer from "@/components/DataRenderer";
 import { EMPTY_QUESTION } from "@/constants/states";
+import CommonFilters from "@/components/filters/CommonFilters";
+import { HomePageFilters } from "@/constants/filters";
 
 interface SearchParams {
   searchParams: Promise<Record<string, string>>;
 }
-
-const test = async () => {
-  try {
-    return await api.users.getAll();
-  } catch (error) {
-    return handleError(error);
-  }
-};
 
 const Home = async ({ searchParams }: SearchParams) => {
   const { page, pageSize, query, filter } = await searchParams;
@@ -60,13 +54,19 @@ const Home = async ({ searchParams }: SearchParams) => {
           <Link href={ROUTES.ASK_QUESTION}> Ask a Question</Link>
         </Button>
       </section>
-      <section className="mt-11">
+      <section className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
         <LocalSearch
           route="/"
           imgSrc="/icons/search.svg"
           placeholder="Search questions..."
           iconPosition="left"
           className="flex-1"
+        />
+
+        <CommonFilters
+          filters={HomePageFilters}
+          otherClasses="min-h-14 sm:min-w-42.5"
+          containerClasses="hidden max-md:flex"
         />
       </section>
       <HomeFilter />
