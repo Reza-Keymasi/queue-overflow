@@ -3,9 +3,12 @@ import DataRenderer from "../DataRenderer";
 import { EMPTY_ANSWERS } from "@/constants/states";
 import CommonFilters from "../filters/CommonFilters";
 import { AnswerFilters } from "@/constants/filters";
+import Pagination from "../Pagination";
 
 interface AllAnswersProps extends ActionResponse<Answer[]> {
   totalAnswers: number;
+  page: number;
+  isNext: boolean;
 }
 
 const AllAnswers = ({
@@ -13,6 +16,8 @@ const AllAnswers = ({
   data,
   error,
   totalAnswers,
+  page,
+  isNext,
 }: AllAnswersProps) => {
   return (
     <div className="mt-11">
@@ -36,6 +41,8 @@ const AllAnswers = ({
           answers.map((answer) => <AnswerCard key={answer._id} {...answer} />)
         }
       />
+
+      <Pagination page={page} isNext={isNext || false} />
     </div>
   );
 };
