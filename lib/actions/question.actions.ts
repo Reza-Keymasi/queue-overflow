@@ -314,7 +314,7 @@ export async function incrementViews(
     return handleError(validationResult) as ErrorResponse;
   }
 
-  const { questionId } = validationResult.params;
+  const { questionId } = validationResult.params!;
 
   try {
     const question = await Question.findById(questionId);
@@ -336,17 +336,19 @@ export async function incrementViews(
   }
 }
 
-export async function getHotQuestions():Promise<ActionResponse<Question[]>> {
+export async function getHotQuestions(): Promise<ActionResponse<Question[]>> {
   try {
     await dbConnect();
 
-    const questions = await Question.find().sort({views:-1, upvotes:-1}).limit(5)
+    const questions = await Question.find()
+      .sort({ views: -1, upvotes: -1 })
+      .limit(5);
 
     return {
-      success:true,
-      data: JSON.parse(JSON.stringify(questions))
-    }
+      success: true,
+      data: JSON.parse(JSON.stringify(questions)),
+    };
   } catch (error) {
-    return handleError(error) as ErrorResponse
+    return handleError(error) as ErrorResponse;
   }
 }
