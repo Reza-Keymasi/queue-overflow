@@ -21,6 +21,7 @@
     "clsx": "^2.1.1",
     "cm6-theme-basic-dark": "^0.2.0",
     "cn": "^0.2.5",
+    "dayjs": "^1.11.23",
     "eslint-plugin-prettier": "^5.5.4",
     "lucide-react": "^0.562.0",
     "mongodb": "^7.1.1",
