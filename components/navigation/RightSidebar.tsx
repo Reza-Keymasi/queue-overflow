@@ -3,22 +3,15 @@ import Image from "next/image";
 
 import ROUTES from "@/constants/routes";
 import TagCard from "../cards/TagCard";
-import { getHotQuestions } from "@/lib/actions/question.actions";
 import DataRenderer from "../DataRenderer";
-import { cn } from "@/lib/utils";
+import { getHotQuestions } from "@/lib/actions/question.actions";
 import { getTopTags } from "@/lib/actions/tag.actions";
 
 const RightSidebar = async () => {
-  const {
-    success: questionsSucccess,
-    data: hotQuestions,
-    error: questionsError,
-  } = await getHotQuestions();
-  const {
-    success: tagsSuccess,
-    data: topTags,
-    error: tagsError,
-  } = await getTopTags();
+  const [
+    { success: questionsSucccess, data: hotQuestions, error: questionsError },
+    { success: tagsSuccess, data: topTags, error: tagsError },
+  ] = await Promise.all([getHotQuestions(), getTopTags()]);
 
   return (
     <section className="max-xl:hidden flex flex-col gap-6 h-screen w-87.5 custom-scrollbar pt-36 background-light900_dark200 light-border sticky right-0 top-0 border-l p-6 shadow-light-300 dark:shadow-none overflow-y-auto">
@@ -47,7 +40,7 @@ const RightSidebar = async () => {
                       src={`${index % 2 === 0 ? "/icons/question-blue.svg" : "/icons/question-green.svg"}`}
                       width={40}
                       height={40}
-                      className={cn("invert-colors w-6 h-6")}
+                      className="invert-colors w-6 h-6"
                     />
                     <p className="flex-1 body-medium text-md text-dark500_light700 line-clamp-2 shrink-0">
                       {title}
