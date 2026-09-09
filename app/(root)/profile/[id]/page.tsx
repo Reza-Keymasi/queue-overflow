@@ -8,6 +8,7 @@ import UserAvatar from "@/components/UserAvatar";
 import { getUser } from "@/lib/actions/user.actions";
 import { Button } from "@/components/ui/button";
 import Stats from "@/components/user/Stats";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Profile = async ({ params }: RouteParams) => {
   const { id } = await params;
@@ -93,6 +94,30 @@ const Profile = async ({ params }: RouteParams) => {
           BRONZE: 0,
         }}
       />
+
+      <section className="flex gap-10 mt-10">
+        <Tabs defaultValue="top-posts" className="flex-2">
+          <TabsList className="background-light800_dark400 min-h-10.5 p-1">
+            <TabsTrigger value="top-posts" className="tab">
+              Top Posts
+            </TabsTrigger>
+            <TabsTrigger value="answers" className="tab">
+              Answers
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="top-posts" className="flex flex-col gap-6 w-full">
+            List of Questions
+          </TabsContent>
+          <TabsContent value="answers" className="flex flex-col gap-6 w-full">
+            List of Answers
+          </TabsContent>
+        </Tabs>
+
+        <div className="w-full flex min-w-62.5 flex-1 flex-col max-lg:hidden">
+          <h3 className="h3-bold text-dark200_light900">Top Tags</h3>
+          <div className="flex flex-col gap-4 mt-7">List of Tags</div>
+        </div>
+      </section>
     </>
   );
 };
