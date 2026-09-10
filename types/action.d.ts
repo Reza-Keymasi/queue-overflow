@@ -85,3 +85,7 @@ interface GetUserAnswersParams extends Omit<
 > {
   userId: string;
 }
+
+interface GetUserTagsParams {
+  userId: string;
+}
