@@ -89,3 +89,7 @@ interface GetUserAnswersParams extends Omit<
 interface GetUserTagsParams {
   userId: string;
 }
+
+interface DeleteQuestionParams {
+  questionId: string;
+}

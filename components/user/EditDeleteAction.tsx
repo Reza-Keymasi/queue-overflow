@@ -16,6 +16,7 @@ import {
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { deleteQuestion } from "@/lib/actions/question.actions";
 
 interface EditDeleteActionProps {
   type: string;
@@ -31,6 +32,8 @@ const EditDeleteAction = ({ type, itemId }: EditDeleteActionProps) => {
 
   const handleDelete = async () => {
     if (type === "Question") {
+      await deleteQuestion({ questionId: itemId });
+
       toast.success("Question Deleted", {
         description: "Your question has been deleted successfully",
       });
