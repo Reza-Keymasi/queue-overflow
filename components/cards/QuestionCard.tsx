@@ -1,20 +1,24 @@
+import Link from "next/link";
+
 import ROUTES from "@/constants/routes";
 import { getTimeStamp } from "@/lib/utils";
-import Link from "next/link";
 import TagCard from "./TagCard";
 import Metric from "../Metric";
+import EditDeleteAction from "../user/EditDeleteAction";
 
 interface QuestionCardProps {
   question: Question;
+  showActionBtns?: boolean;
 }
 
 const QuestionCard = ({
   question: { _id, title, tags, author, createdAt, upvotes, answers, views },
+  showActionBtns = false,
 }: QuestionCardProps) => {
   return (
     <div className="card-wrapper rounded-[10px] p-9 sm:p-11">
-      <div className="flex flex-col-reverse sm:flex-row items-start justify-between gap-5">
-        <div>
+      <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-5">
+        <div className="flex-1">
           <span className="flex sm:hidden subtle-regular text-dark400_light700 line-clamp-1">
             {getTimeStamp(createdAt)}
           </span>
@@ -25,6 +29,8 @@ const QuestionCard = ({
             </h3>
           </Link>
         </div>
+
+        {showActionBtns && <EditDeleteAction type="Question" itemId={_id} />}
       </div>
 
       <div className="w-full flex flex-wrap gap-3 mt-3.5">
