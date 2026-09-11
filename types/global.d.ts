@@ -1,3 +1,4 @@
+import { IInteractionDoc } from "@/database/interaction.model";
 import { NextResponse } from "next/server";
 
 declare global {
@@ -94,5 +95,27 @@ declare global {
     GOLD: number;
     SILVER: number;
     BRONZE: number;
+  }
+
+  interface CreateInteractionParams {
+    action:
+      | "view"
+      | "upvote"
+      | "downvote"
+      | "bookmark"
+      | "post"
+      | "edit"
+      | "delete"
+      | "search";
+    actionId: string;
+    actionTarget: "question" | "answer";
+    authorId: string;
+  }
+
+  interface UpdateReputationParams {
+    interaction: IInteractionDoc;
+    session: mongoose.ClientSession;
+    performerId: string;
+    authorId: string;
   }
 }
