@@ -118,4 +118,10 @@ declare global {
     performerId: string;
     authorId: string;
   }
+
+  interface Badges {
+    GOLD: number;
+    SILVER: number;
+    BRONZE: number;
+  }
 }
