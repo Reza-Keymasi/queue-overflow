@@ -35,8 +35,8 @@ const Stats = ({
   return (
     <div className="mt-3">
       <h4 className="h3-semibold text-dark200_light900">
-        Stats
-        <span className="h3-semibold text-dark200_light900">
+        Stats{" "}
+        <span className="small-semibold primary-text-gradient">
           {formatNumber(reputationPoints)}
         </span>
       </h4>
