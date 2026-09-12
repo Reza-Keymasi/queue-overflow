@@ -1,5 +1,7 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+import { after } from "next/server";
 import mongoose from "mongoose";
 
 import { IAnswerDoc } from "@/database/answer.model";
@@ -7,8 +9,8 @@ import action from "../handlers/action";
 import { AnswerServerSchema, GetAnswerSchema } from "../validations";
 import handleError from "../handlers/error";
 import { Answer, Question } from "@/database";
-import { revalidatePath } from "next/cache";
 import ROUTES from "@/constants/routes";
+import { createInteraction } from "./interaction.actions";
 
 export async function createAnswer(
   params: CreateAnswerParams
@@ -45,6 +47,15 @@ export async function createAnswer(
     question.answers += 1;
 
     await question.save({ session });
+
+    after(async () => {
+      await createInteraction({
+        action: "post",
+        actionId: newAnswer._id.toString(),
+        actionTarget: "answer",
+        authorId: userId as string,
+      });
+    });
 
     await session.commitTransaction();
 
