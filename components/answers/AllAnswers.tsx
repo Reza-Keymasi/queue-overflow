@@ -37,8 +37,8 @@ const AllAnswers = ({
         error={error}
         success={success}
         empty={EMPTY_ANSWERS}
-        render={(answers) =>
-          answers.map((answer) => <AnswerCard key={answer._id} {...answer} />)
+        render={(data) =>
+          data.map((answer) => <AnswerCard key={answer._id} {...answer} />)
         }
       />
 
