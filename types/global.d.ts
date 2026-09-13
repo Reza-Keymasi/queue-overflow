@@ -124,4 +124,11 @@ declare global {
     SILVER: number;
     BRONZE: number;
   }
+
+  interface RecommendationParams {
+    userId: string;
+    query?: string;
+    skip: number;
+    limit: number;
+  }
 }

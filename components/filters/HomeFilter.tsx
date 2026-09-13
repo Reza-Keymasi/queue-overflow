@@ -13,9 +13,6 @@ interface Filter {
 }
 
 const filters: Filter[] = [
-  { name: "React", value: "react" },
-  { name: "Nextjs", value: "nextjs" },
-  { name: "Javascript", value: "javascript" },
   { name: "Newest", value: "newest" },
   { name: "Popular", value: "popular" },
   { name: "Unanswered", value: "unanswered" },
