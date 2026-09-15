@@ -23,6 +23,7 @@ const eslintConfig = [
     rules: {
       "no-undef": "off",
     },
+    ignorePatterns: ["components/ui/**/*"],
   },
 ];
 
