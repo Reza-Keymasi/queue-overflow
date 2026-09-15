@@ -40,7 +40,7 @@ export async function createQuestion(
   if (validationResult instanceof Error)
     return handleError(validationResult) as ErrorResponse;
 
-  const { title, content, tags } = validationResult?.params!;
+  const { title, content, tags } = validationResult.params!;
   const userId = validationResult.session?.user?.id;
 
   const session = await mongoose.startSession();
@@ -112,7 +112,7 @@ export async function editQuestion(
   if (validationResult instanceof Error)
     return handleError(validationResult) as ErrorResponse;
 
-  const { title, content, tags, questionId } = validationResult?.params!;
+  const { title, content, tags, questionId } = validationResult.params!;
   const userId = validationResult.session?.user?.id;
 
   const session = await mongoose.startSession();
@@ -227,7 +227,7 @@ export async function getQuestion(
   if (validationResult instanceof Error)
     return handleError(validationResult) as ErrorResponse;
 
-  const { questionId } = validationResult?.params!;
+  const { questionId } = validationResult.params!;
 
   try {
     const question = await Question.findById(questionId)
