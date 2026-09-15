@@ -1,6 +1,6 @@
 "use server";
 
-import mongoose, { QueryFilter } from "mongoose";
+import { QueryFilter } from "mongoose";
 
 import action from "../handlers/action";
 import handleError from "../handlers/error";

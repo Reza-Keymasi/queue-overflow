@@ -6,7 +6,6 @@ import mongoose, { QueryFilter, Types } from "mongoose";
 
 import action from "../handlers/action";
 import {
-  AnswerSchema,
   AskQuestionSchema,
   DeleteQuestionSchema,
   EditQuestionSchema,
