@@ -6,19 +6,23 @@ import Theme from "./Theme";
 import MobileNavigation from "./MobileNavigation";
 import { auth } from "@/auth";
 import UserAvatar from "@/components/UserAvatar";
+import GlobalSearch from "@/components/search/GlobalSearch";
+import ROUTES from "@/constants/routes";
 
 const Navbar = async () => {
   const session = await auth();
 
   return (
     <nav className="flex-between background-light900_dark200 fixed z-50 w-full p-6 shadow-light-300 dark:shadow-none sm:px-12">
-      <Link href="/" className="flex items-center gap-1">
+      <Link href={ROUTES.HOME} className="flex items-center gap-1">
         <Image src={Logo} alt="Logo" />
         <p className="h3-bold font-space-grotesk text-dark-100 dark:text-light-900 max-sm:hidden">
           Queue<span className="text-primary-500 ">Overflow</span>
         </p>
       </Link>
-      <p>Global Search</p>
+
+      <GlobalSearch />
+
       <div className="flex-between gap-5">
         <Theme />
 

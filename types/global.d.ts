@@ -132,7 +132,7 @@ declare global {
     limit: number;
   }
 
-  interface GlobalSearchItem {
+  interface GlobalSearchedItem {
     id: string;
     type: "question" | "answer" | "user" | "tag";
     title: string;
