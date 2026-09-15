@@ -8,7 +8,7 @@ import { getTagQuestions } from "@/lib/actions/tag.actions";
 
 const TagQuestions = async ({ params, searchParams }: RouteParams) => {
   const { id } = await params;
-  const { page, pageSize, query } = await searchParams;
+  const { page, pageSize } = await searchParams;
 
   const { success, data, error } = await getTagQuestions({
     tagId: id,

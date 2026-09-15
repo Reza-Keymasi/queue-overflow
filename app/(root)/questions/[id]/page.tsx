@@ -22,11 +22,7 @@ const QuestionDetails = async ({ params, searchParams }: RouteParams) => {
   const { id } = await params;
   const { page, pageSize, filter } = await searchParams;
 
-  const {
-    success,
-    data: question,
-    error,
-  } = await getQuestion({ questionId: id });
+  const { success, data: question } = await getQuestion({ questionId: id });
 
   after(async () => {
     await incrementViews({ questionId: id });
