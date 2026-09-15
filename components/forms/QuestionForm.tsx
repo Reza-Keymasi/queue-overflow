@@ -2,7 +2,7 @@
 
 import { KeyboardEvent, useRef, useTransition } from "react";
 import dynamic from "next/dynamic";
-import { Path, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MDXEditorMethods } from "@mdxeditor/editor";
 import z from "zod";
@@ -151,7 +151,7 @@ const QuestionForm = ({ question, isEdit = false }: QuestionFormProps) => {
                 />
               </FormControl>
               <FormDescription className="body-regular text-light-500 mt-2.5">
-                Be specific and imagine you're asking a question to another
+                Be specific and imagine you&apos;re asking a question to another
                 person.
               </FormDescription>
               <FormMessage />

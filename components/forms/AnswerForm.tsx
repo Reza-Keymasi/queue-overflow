@@ -1,18 +1,12 @@
 "use client";
 
-import { useRef, useState, useTransition } from "react";
+import { useRef, useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { AnswerSchema } from "@/lib/validations";
 import dynamic from "next/dynamic";
 import { MDXEditorMethods } from "@mdxeditor/editor";
@@ -26,7 +20,6 @@ const Editor = dynamic(() => import("@/components/editor"), {
 
 const AnswerForm = ({ questionId }: { questionId: string }) => {
   const [isAnswering, startAnsweringTransition] = useTransition();
-  // const [isAISubmitting, setIsAISubmitting] = useState(false)
 
   const editorRef = useRef<MDXEditorMethods>(null);
 
