@@ -44,7 +44,8 @@ const Metric = ({
             className={cn(
               "small-regular line-clamp-1",
 
-              isAuthor ? "max-sm:hidden" : ""
+              isAuthor ? "max-sm:hidden" : "",
+              titleStyles
             )}
           >
             {title}
