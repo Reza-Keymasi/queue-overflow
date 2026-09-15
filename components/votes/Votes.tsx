@@ -63,7 +63,7 @@ const Votes = ({
       });
     } catch (error) {
       toast.error("Failed to vote", {
-        description: "An error occured while voting. Please try again",
+        description: `An error occured while voting. ${error}`,
       });
     } finally {
       setIsLoading(false);
