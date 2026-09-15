@@ -93,3 +93,8 @@ interface GetUserTagsParams {
 interface DeleteQuestionParams {
   questionId: string;
 }
+
+interface GlobalSearchParams {
+  query: string;
+  type: string | null;
+}

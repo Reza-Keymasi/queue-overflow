@@ -131,4 +131,10 @@ declare global {
     skip: number;
     limit: number;
   }
+
+  interface GlobalSearchItem {
+    id: string;
+    type: "question" | "answer" | "user" | "tag";
+    title: string;
+  }
 }
